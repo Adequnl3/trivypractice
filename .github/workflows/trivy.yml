@@ -33,10 +33,12 @@ jobs:
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@7b7aa264d83dc58691451798b4d117d53d21edfe
         with:
+          scan-type: 'fs'
           image-ref: 'testimage'
           format: 'json'
           output: 'trivy-results.json'
           severity: 'CRITICAL,HIGH'
+          security-checks: 'vuln,secret,config'
 
       - name: Upload Trivy scan results as artifact
         uses: actions/upload-artifact@v3
